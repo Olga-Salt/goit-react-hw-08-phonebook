@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+// import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { UserMenu, AuthNav } from 'components/appBar';
 import { getIsLoggedIn } from 'redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
@@ -30,9 +31,9 @@ export default function Layout() {
 
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
 
-      <main>
+      {/* <main>
         <Outlet />
-      </main>
+      </main> */}
     </header>
   );
 }

@@ -58,11 +58,12 @@ import { ContactsView } from 'views/ContactsView';
 import PrivetRoute from 'components/privetRoute/PrivetRoute';
 import PublicRoute from 'components/publicRoute/PublicRoute';
 import { getIsFetching } from 'redux/auth/auth-selectors';
+import { Section } from 'components';
 
 const Layout = lazy(() => import('./views/LayoutView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
-const HomeView = lazy(() => import('./views/HomeView'));
+// const HomeView = lazy(() => import('./views/HomeView'));
 
 export function App() {
   const dispatch = useDispatch();
@@ -72,49 +73,97 @@ export function App() {
     dispatch(refresh());
   }, [dispatch]);
 
+  // return (
+  //   !isFetching && (
+  //     <Suspense fallback={<div>Загрузка...</div>}>
+  //       <Routes>
+  //         <Route path="/" element={<Layout />}>
+  //           <Route
+  //             index
+  //             element={
+  //               <PublicRoute>
+  //                 <HomeView />
+  //               </PublicRoute>
+  //             }
+  //           />
+
+  //           <Route
+  //             path="login"
+  //             element={
+  //               <PublicRoute restricted>
+  //                 <LoginView />
+  //               </PublicRoute>
+  //             }
+  //           />
+
+  //           <Route
+  //             path="register"
+  //             element={
+  //               <PublicRoute restricted>
+  //                 <RegisterView />
+  //               </PublicRoute>
+  //             }
+  //           />
+
+  //           <Route
+  //             path="contacts"
+  //             element={
+  //               <PrivetRoute>
+  //                 <ContactsView />
+  //               </PrivetRoute>
+  //             }
+  //           />
+
+  //           <Route path="*" element={<Navigate to="/" replace />} />
+  //         </Route>
+  //       </Routes>
+  //     </Suspense>
+  //   )
+  // );
+
   return (
     !isFetching && (
       <Suspense fallback={<div>Загрузка...</div>}>
+        <Layout />
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <PublicRoute>
-                  <HomeView />
-                </PublicRoute>
-              }
-            />
+          <Route path="/" element={<Section />} />
+          {/* <Route
+            // index
+            element={
+              <PublicRoute>
+                <HomeView />
+              </PublicRoute>
+            }
+          /> */}
 
-            <Route
-              path="login"
-              element={
-                <PublicRoute restricted>
-                  <LoginView />
-                </PublicRoute>
-              }
-            />
+          <Route
+            path="login"
+            element={
+              <PublicRoute restricted>
+                <LoginView />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="register"
-              element={
-                <PublicRoute restricted>
-                  <RegisterView />
-                </PublicRoute>
-              }
-            />
+          <Route
+            path="register"
+            element={
+              <PublicRoute restricted>
+                <RegisterView />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="contacts"
-              element={
-                <PrivetRoute>
-                  <ContactsView />
-                </PrivetRoute>
-              }
-            />
+          <Route
+            path="contacts"
+            element={
+              <PrivetRoute>
+                <ContactsView />
+              </PrivetRoute>
+            }
+          />
 
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     )
